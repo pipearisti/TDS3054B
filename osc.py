@@ -6,6 +6,7 @@ import numpy as np
 from struct import unpack
 import pylab
 
+import os
 import gzip
 import cPickle as pickle
 import time
@@ -75,7 +76,7 @@ class TDS3054B(object):
             time.sleep(0.05)
         for c in ch:
             print('CHANNEL: ' + str(c))
-            self.ch[c].get_envelope(single=False, n=n)
+            self.ch[c].get_average(single=False, n=n)
 
         # Set acquisiton mode back and Run state
         self.scope.write('ACQ:MOD ' + acq_mode)
@@ -140,9 +141,16 @@ class TDS3054B(object):
         if acq_mode == 'ENV':
             self.scope.write('ACQ:NUME ' + str(n))
 
-    def save(self, file_name=None):
-        if file_name is None:
-            file_name = time.strftime("%Y%m%d%H%M%S.pkl.gz")
+    def save(self, file_name=None, dir_name=None, prefix=None):
+        date_str = time.strftime("%Y%m%d%H%M%S.pkl.gz")
+
+        if file_name is None and prefix is None:
+            file_name = date_str
+        if file_name is None and prefic is not None:
+            file_name = prefix + date_str
+
+        if dir_name is not None:
+            file_name = os.path.join(dir_name, file_name)
 
         data = dict()
         for ch in [1, 2, 3, 4]:
