@@ -73,7 +73,7 @@ class TDS3054B(object):
         self.scope.write('ACQ:STOPA SEQ')
         while int(self.scope.query('BUSY?')):
             print('AVERAGE: ' + str(int(self.scope.query('ACQ:NUMAC?'))))
-            time.sleep(0.05)
+            time.sleep(0.20)
         for c in ch:
             print('CHANNEL: ' + str(c))
             self.ch[c].get_average(single=False, n=n)
@@ -109,7 +109,7 @@ class TDS3054B(object):
         self.scope.write('ACQ:STOPA SEQ')
         while int(self.scope.query('BUSY?')):
             print('ENVELOPE: ' + str(int(self.scope.query('ACQ:NUMAC?'))))
-            time.sleep(0.05)
+            time.sleep(0.20)
         for c in ch:
             print('CHANNEL: ' + str(c))
             self.ch[c].get_envelope(single=False, n=n)
