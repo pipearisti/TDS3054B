@@ -376,10 +376,10 @@ class OSCChannel(object):
         val_min = float(min(data))
         m = (target_min - target_max) / (val_min - val_max)
         b = target_max / m - val_max
-        scale = float(self.scope.query('CH1:SCAL?'))
-        pos = float(self.scope.query('CH1:POS?'))
+        scale = float(self.scope.query(self.name + ':SCAL?'))
+        pos = float(self.scope.query(self.name + ':POS?'))
         npos = b * 10.0 / 255.0 /m*scale + pos
-        self.scope.write('CH1:SCALE ' + str(scale / m))
+        self.scope.write(self.name + ':SCALE ' + str(scale / m))
 
         # self.get_curve()
         # data = self.extract_curve()
@@ -390,11 +390,8 @@ class OSCChannel(object):
         else:
             dpos = (val_max * 10. / 255. - 5 - 4)
         npos = pos - dpos
-        self.scope.write('CH1:POS ' + str(npos))
+        self.scope.write(self.name + ':POS ' + str(npos))
         self.scope.write('*WAI')
-        print 'abc'
-
-
 
     def extract_curve(self, i=0):
         raw = self.raw[i]
