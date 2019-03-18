@@ -155,17 +155,17 @@ class TDS3054B(object):
         data = dict()
         for ch in [1, 2, 3, 4]:
             ch_data = dict()
-            ch_data['env'] = self.ch[ch].env
+            #ch_data['env'] = self.ch[ch].env
             ch_data['env_n'] = self.ch[ch].env_n
             ch_data['env_raw'] = self.ch[ch].env_raw
             ch_data['env_pre'] = self.ch[ch].env_pre
 
-            ch_data['avg'] = self.ch[ch].avg
+            #ch_data['avg'] = self.ch[ch].avg
             ch_data['avg_n'] = self.ch[ch].avg_n
             ch_data['avg_raw'] = self.ch[ch].avg_raw
             ch_data['avg_pre'] = self.ch[ch].avg_pre
 
-            ch_data['repeats'] = self.ch[ch].repeats
+            #ch_data['repeats'] = self.ch[ch].repeats
             ch_data['raw'] = self.ch[ch].raw
             ch_data['pre'] = self.ch[ch].pre
 
